@@ -7,25 +7,19 @@ function callback5(boards, cards, lists) {
     const Name = ["Mind", "Space"];
     boards.forEach((board) => {
       if (board.name === "Thanos") {
-        let temBoard = [];
-        temBoard.push(board);
-        callback1(board.id, temBoard, (res) => {
-          let temData = [];
-          console.log(res);
-          temData.push(res);
-          temData.find((data) => {
-            callback2(data.id, lists, (res) => {
-              console.log(res);
-              Name.forEach((name) => {
-                res.find((dataName) => {
-                  if (dataName.name === name) {
-                    callback3(dataName.id, cards, (res) => {
-                      res.forEach((tData) => {
-                        console.log(tData);
-                      });
+        callback1(board.id, boards, (res, err) => {
+          res ? console.log(res) : console.error(err);
+          callback2(res.id, lists, (res, err) => {
+            res ? console.log(res) : console.error(err);
+            Name.forEach((name) => {
+              res.find((ele) => {
+                if (ele.name === name) {
+                  callback3(ele.id, cards, (res) => {
+                    res.forEach((element) => {
+                      res ? console.log(element) : console.error(err);
                     });
-                  }
-                });
+                  });
+                }
               });
             });
           });
