@@ -1,27 +1,18 @@
-const { callback1 } = require("./callback1");
-const { callback2 } = require("./callback2");
-const { callback3 } = require("./callback3");
+const boards = require("./Jdata/boards.json");
+const lists = require("./Jdata/lists.json");
+const cards = require("./Jdata/cards.json");
 
-function callback6(boards, cards, lists) {
+function callback6(callback1, callback2, callback3) {
   setTimeout(() => {
     boards.forEach((board) => {
       if (board.name === "Thanos") {
-        callback1(board.id, boards, (res) => {
-          let temData = [];
-          console.log(res);
-          temData.push(res);
-          temData.find((data) => {
-            callback2(data.id, lists, (res) => {
-              console.log(res);
-
-              res.find((dataName) => {
-                callback3(dataName.id, cards, (res) => {
-                  res.forEach((tData) => {
-                    if (tData) {
-                      console.log(tData);
-                    }
-                  });
-                });
+        callback1(board.id, boards, (res, err) => {
+          res ? console.log(res) : console.error(err);
+          callback2(res.id, lists, (res, err) => {
+            res ? console.log(res) : console.error(err);
+            res.find((ele) => {
+              callback3(ele.id, cards, (res) => {
+                console.log(res);
               });
             });
           });
