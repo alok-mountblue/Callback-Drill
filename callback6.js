@@ -6,9 +6,7 @@ function callback6(boards, cards, lists) {
   setTimeout(() => {
     boards.forEach((board) => {
       if (board.name === "Thanos") {
-        let temBoard = [];
-        temBoard.push(board);
-        callback1(board.id, temBoard, (res) => {
+        callback1(board.id, boards, (res) => {
           let temData = [];
           console.log(res);
           temData.push(res);
