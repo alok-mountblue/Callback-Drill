@@ -7,7 +7,6 @@ function callback3(cardId, cards, cb) {
         break;
       }
     }
-    //let result = Object.entries(cards).find(ele => ele[0] === cardId);
     if (result) {
       cb(result);
     } else {
