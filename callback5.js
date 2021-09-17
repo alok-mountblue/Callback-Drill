@@ -7,23 +7,25 @@ function callback5(boards, cards, lists) {
     const Name = ["Mind", "Space"];
     boards.forEach((board) => {
       if (board.name === "Thanos") {
-        callback1(board.id, boards, (res, err) => {
-          res ? console.log(res) : console.error(err);
-          callback2(res.id, lists, (res, err) => {
-            res ? console.log(res) : console.error(err);
+        callback1(board.id, boards)
+          .then((res) => {
+            console.log(res);
+            return callback2(res.id, lists);
+          })
+          .then((res) => {
+            console.log(res);
             Name.forEach((name) => {
               res.find((ele) => {
                 if (ele.name === name) {
-                  callback3(ele.id, cards, (res) => {
-                    res.forEach((element) => {
-                      res ? console.log(element) : console.error(err);
+                  callback3(ele.id, cards).then((res) => {
+                    res.forEach((ele) => {
+                      console.log(ele);
                     });
                   });
                 }
               });
             });
           });
-        });
       }
     });
   }, 2 * 1000);
